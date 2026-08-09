@@ -1,0 +1,159 @@
+Software Requirement Specification (SRS)
+Smart Event & Concert Ticket Booking System
+
+1. Introduction:
+1.1 Purpose
+This Software Requirements Specification (SRS) document details the functional, non-functional, and interface requirements for the Smart Event & Concert Ticket Booking System. The intended audience includes software developers, quality assurance testers, project managers, and lab evaluators. It serves as a formal contract defining system expectations prior to development.
+1.2 Scope
+The Smart Event & Concert Ticket Booking System is a web-based platform that enables users to browse live events, select interactive venue seats, purchase digital tickets, and receive QR-code entry passes.
+Included Features: User registration/login, event search and genre filtering, interactive seat grid selection, promo code application, third-party payment gateway integration, automated QR-code ticket generation, and an event organizer dashboard.
+Excluded Features: Physical ticket printing/mailing services, on-site security gate hardware manufacturing, and direct bank-level ledger auditing.
+1.3 Definitions, Acronyms, and Abbreviations
+SRS: Software Requirement Specification
+UI/UX: User Interface / User Experience
+API: Application Programming Interface
+QR Code: Quick Response Code
+HTTPS: Hypertext Transfer Protocol Secure
+JWT: JSON Web Token
+1.4 References
+IEEE 29148 / IEEE 830 Software Requirements Standard
+REST API Integration Guidelines
+1.5 Overview
+The remainder of this document outlines the product perspective, general capabilities, functional specifications, non-functional constraints, external interface setups, and data requirements.
+
+2. Overall Description:
+2.1 Product Perspective
+The application operates as a distributed client-server web app. The frontend communicates with a backend RESTful service, which interacts with a relational database, third-party payment processing services, and email notification gateways.
+2.2 Product Functions
+Account management and profile authentication.
+Event discovery with search and category filtering (Concerts, Sports, Theater).
+Real-time seat selection map with availability status.
+Checkout and payment gateway transaction handling.
+Automated PDF ticket generation with embedded QR codes.
+Organizer management portal to post events and view ticket sales analytics.
+2.3 User Classes and Characteristics
+User Class
+Skills
+Responsibilities
+Customer / Buyer
+Basic internet browsing
+Search events, choose seats, complete payments, present digital QR pass.
+Event Organizer
+Moderate technical skill
+Create event listings, define ticket pricing, manage seating charts.
+System Admin
+High technical expertise
+Moderate posted content, manage user accounts, oversee system logs.
+
+
+2.4 Operating Environment
+Client Side: Web browsers (Chrome, Edge, Safari, Firefox) on Desktop/Mobile.
+Backend Server: Node.js / Python environment running on Linux Cloud Server.
+Database: PostgreSQL or MySQL database.
+Network: Standard Internet connection (4G/5G/WiFi).
+2.5 Design and Implementation Constraints
+All sensitive user data must transmit over encrypted HTTPS connections.
+Third-party payment gateways (e.g., Stripe API) must handle payment processing.
+Responsive web design is mandatory for mobile device compatibility.
+2.6 User Documentation
+Frequently Asked Questions (FAQs) page.
+Interactive online booking guide.
+2.7 Assumptions and Dependencies
+Users possess an active internet connection and valid payment methods.
+Third-party payment and email dispatch APIs maintain operational uptime.
+
+3. Functional Requirements:
+3.1 System Features
+Feature 1: User Authentication & Profile Management
+Description: Allows customers and organizers to create accounts and authenticate securely.
+Priority: High
+Inputs: Name, Email, Password, Role (Buyer/Organizer).
+Processing: Validate input format, hash password with bcrypt, issue JWT upon verification.
+Outputs: Account creation confirmation or authorization token.
+Feature 2: Interactive Seat Selection & Booking
+Description: Displays venue seat map with real-time seat availability.
+Priority: High
+Inputs: Selected Event ID, Selected Seat Numbers (e.g., Row A, Seats 12-13).
+Processing: Lock chosen seats temporarily (10-minute timer) to prevent double-booking.
+Outputs: Seat reservation lock confirmation and total order calculation.
+Feature 3: Payment Processing & Ticket Issuance
+Description: Processes checkout total and generates a digital pass.
+Priority: High
+Inputs: Payment credentials, Promo code (optional).
+Processing: Validate payment via external API, generate unique booking reference ID, attach encrypted QR code.
+Outputs: Success screen with downloadable PDF/QR pass and confirmation email.
+3.2 Use Case Specification
+Use Case Name: Book Concert Ticket
+Actors: Customer
+Pre-conditions: User is logged in and event seats are unreserved.
+Main Flow:
+Customer searches and selects a concert.
+Customer chooses available seats on the venue layout.
+Customer clicks "Proceed to Payment" and inputs transaction credentials.
+System confirms transaction, updates seat status to "Sold", and displays the QR ticket.
+Alternate Flow: If payment fails, System releases seat lock and prompts user to retry.
+Post-conditions: Ticket record stored in database with "Confirmed" status.
+
+4. External Interface Requirements:
+4.1 User Interfaces
+Landing Page: Search bar, top trending concert banners, category navigation tags.
+Seat Map UI: Visual grid with color-coded seats (Green = Available, Red = Sold, Yellow = Reserved).
+Checkout Screen: Order summary, promo box, payment inputs.
+4.2 Software Interfaces
+Payment Gateway API: For transaction verification (e.g., Stripe API).
+Email Service API: For automated QR-code ticket dispatch (e.g., SendGrid API).
+4.3 Communication Interfaces
+Protocol: HTTPS over TCP/IP.
+Data Exchange Format: JSON.
+
+5. Non-Functional Requirements:
+5.1 Performance Requirements: Seat selection updates must render within 1.5 seconds; server must support up to 2,000 concurrent booking requests.
+5.2 Security Requirements: Password encryption using bcrypt; role-based access control (RBAC); PCI-DSS compliance via payment gateways.
+5.3 Reliability Requirements: 99.5% target system availability with database daily backup restoration capabilities.
+5.4 Usability Requirements: Simple navigation layout requiring no more than 4 clicks to complete a booking.
+
+6. Data Requirements
+6.1 Data Description
+User ID: Unique integer identifier for each customer or event organizer.
+Event ID: Unique integer identifier for listed concerts or events.
+Seat ID: Unique alphanumeric string representing seat placement (e.g., SEC-A-12).
+Booking Reference: Unique encrypted string used for QR code generation.
+Ticket Price: Decimal value representing cost per ticket.
+Data Validation Rules: Email fields must conform to standard email regex patterns; ticket prices and seat counts must strictly be non-negative values.
+6.2 Database Requirements
+Users Table: Primary key (UserID), fields for Name, Email, PasswordHash, Role.
+Events Table: Primary key (EventID), foreign key (OrganizerID), fields for Title, Category, Venue, Date, TotalSeats.
+Seats Table: Primary key (SeatID), foreign key (EventID), fields for SeatNumber, Price, Status (Available, Locked, Sold).
+Bookings Table: Primary key (BookingID), foreign keys (UserID, EventID), fields for TotalPrice, QRCodeURL, Timestamp.
+
+7. Quality Attributes
+Correctness: The system must accurately maintain seat inventory and ensure zero double-booking instances during high-volume sales.
+Efficiency: High computational efficiency for processing rapid transaction locks (< 1.5 seconds) under concurrent user traffic.
+Flexibility: Easy addition of new event types, promotional discount structures, or venue seating layouts without core architecture overhauls.
+Reusability: Modular backend components (e.g., notification dispatcher, payment processor interface) designed to be reusable across future subsystem expansions.
+Testability: High code coverage capability for automated unit and integration tests across payment gateways and booking logic.
+
+8. Constraints and Risks
+Constraints
+Technical: System depends on HTTPS protocol standards and mandatory integration with certified third-party payment gateways.
+Regulatory: Must comply with PCI-DSS guidelines for handling electronic payment data.
+Risks
+API Downtime: Failure or latency spike in external payment gateways (e.g., Stripe API) disrupting the checkout process.
+Network Failures: Sudden dropped connections on mobile clients during seat lock or payment verification steps.
+Security Threats: Distributed Denial of Service (DDoS) attacks or automated bot scraping during high-demand concert ticket launches.
+
+9. Acceptance Criteria
+Functional Verification: All primary user paths: user registration, event filtering, seat map rendering, seat locking, payment execution, and QR pass creation are completely verified without errors.
+Concurrency Handling: The 10-minute seat locking mechanism successfully prevents double-booking scenarios when tested under simultaneous multi-user attempts for the same seat.
+Payment Integration: 100% of mock transaction test cases (success, failure, timeout) return accurate system responses and status logs.
+Performance Benchmarking: Page load time under 2 seconds and seat map response times under 1.5 seconds are verified.
+
+9. Appendices & Glossary
+Glossary
+Buyer / Customer: End-user purchasing event tickets through the platform.
+Event Organizer: Entity or user authorized to publish events, define seating charts, and set ticket prices.
+Seat Lock: A temporary system lock (e.g., 10 minutes) placed on selected seats to prevent other users from booking them during checkout.
+QR Code (Quick Response Code): A machine-readable 2D barcode containing encrypted booking validation data for gate access scanning.
+PCI-DSS: Payment Card Industry Data Security Standard regulating secure handling of credit card information.
+Conclusion: 
+The Software Requirement Specification for the Smart Event & Concert Ticket Booking System has been successfully prepared according to standard guidelines.
