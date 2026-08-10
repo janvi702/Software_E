@@ -1,0 +1,26 @@
+               +-------------------------------------------------------------+
+               |        Smart Event & Concert Ticket Booking System          |
+               |                                                             |
+               |-------> ( Browse Events )                                   |
+               |                                                             |
+   (o) --------+-------> ( Select Seats )                                    |
+ Customer      |             |                                               |
+               |             | <<include>>                                   |
+               |             v                                               |
+               |   ( Make Payment )                                          |
+               |             |                                               |
+               |             | <<include>>                                   |
+               |             v                                               |
+               |   ( Generate QR Ticket )                                    |
+               |                                                             |
+               |                            ( Manage Events ) <--------------+------ (o)     
+               |                                                             |       Organizer
+               |                    ( Configure Seat Layout ) <--------------+ 
+               |                                                             |
+               |                     ( View Sales Analytics ) <--------------+ 
+               |                                                             |
+    (o)--------+----------->  ( Manage User Accounts )                       |
+Admin          |                                                             |          
+               +----------->  ( View System Logs )                           |
+               |                                                             |
+               +-------------------------------------------------------------+
