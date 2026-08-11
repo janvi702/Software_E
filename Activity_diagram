@@ -1,3 +1,6 @@
+### ACTIVITY DIAGRAM FOR EVENT AND CONCERT MANAGEMENT SYSTEM ###
+
+
 Customer          Smart Event System           Payment Gateway        Email Service
    |                      |                          |                     |
  ( * )                    |                          |                     |
