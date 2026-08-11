@@ -1,0 +1,27 @@
+Customer          Smart Event System           Payment Gateway        Email Service
+   |                      |                          |                     |
+ ( * )                    |                          |                     |
+   |                      |                          |                     |
+[ Search & Select ]       |                          |                     |
+[ Event / Seat    ] ----> |                          |                     |
+   |                   [ Lock Seat for 10 min ]      |                     |
+   |                      |                          |                     |
+[ Enter Payment   ] ----> |                          |                     |
+  Credentials             |                          |                     |
+                          | --- Request Auth ------> |                     |
+                          |                          |                     |
+                          | <--- Auth Success? ----- |                     |
+                          |             |            |                     |
+                       < Decision: Is Payment OK? >  |                     |
+                       /                         \                         |
+             [ If No / Failed ]            [ If Yes / Success ]             |
+                     |                             |                       |
+             [ Unlock Seats ]              [ Update Seat to 'Sold' ]       |
+                     |                             |                       |
+             [ Show Error   ]              [ Generate QR Code ] ---------> |
+             [ Notification ]                      |                 [ Send Digital ]
+                     |                             v                 [ Pass PDF     ]
+                    ( * )                   [ Display Order ]              |
+                                            [ Confirmation  ]             ( * )
+                                                   |
+                                                  ( * )
