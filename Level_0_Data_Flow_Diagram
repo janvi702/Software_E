@@ -1,0 +1,20 @@
+###Level 0 Data Flow Diagram###
+
+
+               +-----------------------------------+
+               |          Event Organizer          |
+               +-----------------------------------+
+                 |                               ^
+   Event Details |                               | Sales Analytics
+   & Pricing     v                               | Reports
+     +---------------------------------------------------+
+     |                      0                            |
+     | Smart Event & Concert Ticket Booking System       |
+     +---------------------------------------------------+
+       ^       |                                   |       ^
+Select |       | Order Summary                     |       | Payment Auth
+  Seat |       | & QR Ticket Pass                  v       | Response
+       |       v                               +---------------+
+     +-------------------+                     |    Payment    |
+     |     Customer      |                     |    Gateway    |
+     +-------------------+                     +---------------+
