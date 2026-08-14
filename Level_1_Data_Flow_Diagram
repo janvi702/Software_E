@@ -1,0 +1,45 @@
+### Level 1 of data flow diagram###
+
+                 +-------------------+
+                 |     Customer      |
+                 +-------------------+
+                   |               ^
+     Search / Seat |               | Seat Map
+     Selection     v               |
+            +---------------+      |
+            |      1.0      |------+
+            | Browse Events |
+            |    & Seats    |
+            +---------------+
+                   |
+                   | Fetch Layout / Status
+                   v
+            +--------------+             +--------------+
+            |  D1: Events  |             |  D2: Seats   |
+            +--------------+             +--------------+
+                   |                            ^
+                   +-------------------+        | Update Status
+                                       |        | (Locked/Sold)
+                                       v        |
+   Payment Details  +-------------------------------+
+ -----------------> |              2.0              | <-----------------+
+                    | Place Order & Process Payment |                   |
+                    +-------------------------------+                   |
+                       |                         |                      | Order Details
+                       | Verify Token            | Order Details        |
+                       v                         v                      |
+               +---------------+         +---------------+      +------------------+
+               |    Payment    |         |  D3: Bookings |      | Event Organizer  |
+               |    Gateway    |         +---------------+      +------------------+
+               +---------------+                 |
+                                                 v
+                                         +---------------+      +------------------+
+                                         |      3.0      |----->|  Email Service   |
+                                         | Ticket & QR   |      +------------------+
+                                         | Dispatcher    |               |
+                                         +---------------+               | PDF Pass
+                                                 |                       v
+                                                 |              +------------------+
+                                                 +------------->|     Customer     |
+                                                                +------------------+
+
