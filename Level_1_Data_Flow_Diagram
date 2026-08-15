@@ -43,3 +43,54 @@
                                                  +------------->|     Customer     |
                                                                 +------------------+
 
+
+OR
+
+
+=================================================================================================================
+                                   Level 1: Smart Event Ticket Booking System
+=================================================================================================================
+
+   [ CUSTOMER / ATTENDEE ]                             [ ORGANIZER / ARTIST ]                  [ EVENT ADMIN ]
+       |             ^                                      |            ^                         |
+       | Credentials | JWT Token                            | Details    | Payout / Reports        | Approvals
+       v             |                                      v            |                         v
++---------------------------+                        +--------------------------+        +-------------------+
+| 1.0 User Authentication  | <--- Read/Write -----> |     D1: Users Table      |        | 4.0 System Admin  |
++---------------------------+                        +--------------------------+        |   & Moderation    |
+       |                                                    ^            ^               +-------------------+
+       | Validated User ID                                  |            |                         |
+       v                                                    |            |                         v
++---------------------------+                        +--------------------------+        +-------------------+
+| 2.0 Event & Seat Search  | <--- Fetch Events ---->|     D2: Events Table     | <-----> |   D2: Events      |
++---------------------------+                        +--------------------------+        +-------------------+
+       |                                                    ^            ^
+       | Selected Seats & Event ID                          |            |
+       v                                                    v            |
++---------------------------+                        +--------------------------+
+| 3.0 Booking & Lock Engine | <--- Lock/Update ----> |      D3: Seats Table     |
++---------------------------+                        +--------------------------+
+       |                                                            ^
+       | Order Details & Total                                      | Update Status (Sold)
+       v                                                            |
++---------------------------+    Payment Request    +---------------------------+
+| 5.0 Payment Processing    | --------------------> |     [ PAYMENT GATEWAY ]   |
++---------------------------+ <---- Auth Token ---- +---------------------------+
+       |
+       | Transaction Success
+       v
++---------------------------+                        +--------------------------+
+| 6.0 Ticket & QR Dispatch  | <--- Store Booking -->|    D4: Bookings Table    |
++---------------------------+                        +--------------------------+
+       |
+       | Digital Pass PDF / QR
+       v
+   [ CUSTOMER / ATTENDEE ]
+
+=================================================================================================================
+Notation Key:
+- Sharp Rectangles [ ... ]  : External Entities
+- Circles / Ovals ( 1.0 )   : Sub-Processes
+- Open Rectangles | D1: ... |: Data Stores / DB Tables
+- Arrows ( ---> )           : Data Flow Directions
+=================================================================================================================
