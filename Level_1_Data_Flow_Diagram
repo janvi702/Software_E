@@ -88,9 +88,3 @@ OR
    [ CUSTOMER / ATTENDEE ]
 
 =================================================================================================================
-Notation Key:
-- Sharp Rectangles [ ... ]  : External Entities
-- Circles / Ovals ( 1.0 )   : Sub-Processes
-- Open Rectangles | D1: ... |: Data Stores / DB Tables
-- Arrows ( ---> )           : Data Flow Directions
-=================================================================================================================
