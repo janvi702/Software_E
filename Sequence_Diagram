@@ -1,0 +1,35 @@
+sequenceDiagram
+    autonumber
+    actor Customer
+    participant UI as Frontend UI
+    participant Auth as Auth Controller
+    participant Booking as Booking Engine
+    participant DB as Database
+    participant Payment as Payment Gateway API
+    participant Email as Email Service API
+
+    Customer->>UI: Selects Event & Picks Seats
+    UI->>Booking: POST /api/seats/lock (SeatIDs, EventID)
+    Booking->>DB: Update Seat Status to 'Locked'
+    DB-->>Booking: Confirmation (10-min timer started)
+    Booking-->>UI: Seat Lock Success & Order Summary
+
+    Customer->>UI: Enters Payment Details & Submits
+    UI->>Booking: POST /api/checkout (PaymentToken, OrderDetails)
+    Booking->>Payment: Process Payment (Amount, Token)
+    
+    alt Payment Successful
+        Payment-->>Booking: Transaction Success Token
+        Booking->>DB: Update Seat Status to 'Sold'
+        Booking->>DB: Create Booking Record (BookingID, UserID)
+        Booking->>Booking: Generate Encrypted QR Code
+        Booking->>Email: Send Digital Pass PDF (EmailPayload, QR)
+        Email-->>Booking: Email Dispatched
+        Booking-->>UI: 200 OK (Booking Confirmation & QR Pass)
+        UI-->>Customer: Display Order Confirmation Screen
+    else Payment Failed
+        Payment-->>Booking: Transaction Failed
+        Booking->>DB: Revert Seat Status to 'Available'
+        Booking-->>UI: Payment Failure Alert
+        UI-->>Customer: Display Error & Prompt Retry
+    end
