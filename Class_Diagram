@@ -1,0 +1,72 @@
+classDiagram
+    class User {
+        +int userID
+        +String name
+        +String email
+        +String passwordHash
+        +String role
+        +register() bool
+        +login() String
+    }
+
+    class Customer {
+        +searchEvents(keyword: String) List~Event~
+        +selectSeats(seatIDs: List) bool
+        +makePayment(paymentDetails: String) bool
+    }
+
+    class EventOrganizer {
+        +createEvent(eventDetails: Event) bool
+        +configureSeating(layout: String) bool
+        +viewSalesAnalytics() Report
+    }
+
+    class Event {
+        +int eventID
+        +int organizerID
+        +String title
+        +String category
+        +String venue
+        +DateTime date
+        +int totalSeats
+        +getAvailableSeats() List~Seat~
+    }
+
+    class Seat {
+        +String seatID
+        +int eventID
+        +String seatNumber
+        +double price
+        +String status
+        +lockSeat() bool
+        +markAsSold() bool
+        +releaseLock() bool
+    }
+
+    class Booking {
+        +String bookingID
+        +int userID
+        +int eventID
+        +double totalPrice
+        +DateTime timestamp
+        +String status
+        +createBooking() bool
+        +cancelBooking() bool
+    }
+
+    class Ticket {
+        +String ticketID
+        +String bookingID
+        +String qrCodeURL
+        +String pdfPassPath
+        +generateQRCode() String
+        +sendEmailPass() bool
+    }
+
+    User <|-- Customer
+    User <|-- EventOrganizer
+    Customer "1" -- "0..*" Booking : places
+    EventOrganizer "1" -- "0..*" Event : creates
+    Event "1" *-- "1..*" Seat : contains
+    Booking "1" o-- "1..*" Seat : reserves
+    Booking "1" -- "1" Ticket : generates
