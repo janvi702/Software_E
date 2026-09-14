@@ -1,0 +1,78 @@
+Test Requirements for Smart Event & Concert Ticket Booking Management System 
+
+User Authentication & Profile Management:
+The system shall allow a new customer or event organizer to register using a valid name, email, password, and user role. 
+The system shall reject registration when the email format is invalid or required registration information is missing. 
+The system shall allow a registered user to log in using valid credentials and issue an authorization token after successful authentication. 
+The system shall deny access when invalid login credentials are entered. 
+The system shall restrict functions according to the user's assigned role, including Buyer, Organizer, and Administrator. 
+
+Event Search & Discovery 
+The system shall allow users to browse available live events and concerts.
+The system shall allow users to search for events using an event name or keyword. 
+The system shall allow users to filter events by categories such as Concerts, Sports, and Theater.
+The system shall display appropriate matching event information after a valid search or category selection.
+The system shall display a suitable no-results message when no event matches the search criteria.
+
+Event Organizer Management 
+The system shall allow an authorized event organizer to create and publish event listings. 
+The system shall allow the organizer to define event title, category, venue, date, ticket pricing, and seating information. 
+The system shall allow the organizer to manage seating charts associated with an event. 
+The system shall allow the organizer to view ticket sales information and analytics. 
+The system shall prevent unauthorized users from accessing organizer management functions. 
+
+Interactive Seat Selection & Booking
+The system shall display the venue seating layout with real-time seat availability. 
+The system shall visually identify Available, Locked/Reserved, and Sold seats. 
+The system shall allow a logged-in customer to select one or more available seats. 
+The system shall temporarily lock selected seats for 10 minutes during checkout. 
+The system shall prevent another customer from booking a locked or sold seat. 
+The system shall calculate and display the total order amount based on selected seats and ticket prices. 
+The system shall release the temporary seat lock when payment fails or the lock period expires.
+
+Promo Code & Checkout 
+The system shall display an order summary and promo code field on the checkout screen.
+The system shall accept a valid promotional code and apply the applicable discount. 
+The system shall reject an invalid or expired promotional code without applying an incorrect discount.
+The system shall display payment and order details before transaction submission. 
+The system shall validate required checkout information before allowing payment. 
+
+Payment Processing 
+The system shall process ticket payments through the integrated third-party payment gateway. 
+The system shall validate the payment response received from the external payment API.
+The system shall display a success response when a valid payment transaction is completed.
+The system shall display an appropriate failure response when payment is unsuccessful. 
+The system shall handle payment timeout or gateway failure without creating an invalid confirmed booking.
+The system shall release locked seats when payment fails.
+The system shall maintain appropriate payment and transaction status information. 
+
+Digital Ticket & QR Code Issuance 
+The system shall generate a unique booking reference after successful payment. 
+The system shall generate a downloadable PDF ticket after a confirmed booking.
+The system shall generate and attach an encrypted QR code containing booking validation information. 
+The system shall display the QR ticket to the customer after successful payment.
+The system shall send the digital ticket or QR pass through the configured email service. 
+The system shall not issue a confirmed QR ticket for an unsuccessful payment. 
+
+Booking & Database Management 
+The system shall store confirmed booking records with user, event, booking reference, total price, QR information, and timestamp. 
+The system shall maintain unique identifiers for users, events, seats, and bookings. 
+The system shall correctly update seat status from Available to Locked and then Sold after successful booking. 
+The system shall maintain accurate seat inventory and prevent double-booking.
+The system shall store event, seat, and booking information in the configured relational database. 
+
+Security, Performance & Reliability 
+The system shall transmit sensitive user information through encrypted HTTPS connections and protect stored passwords using bcrypt hashing. 
+The system shall enforce role-based access control for Buyer, Organizer, and Administrator functions. 
+The system shall support payment processing through the certified payment gateway according to the stated PCI-DSS requirement.
+The system shall render seat selection updates within 1.5 seconds. 
+The system shall support up to 2,000 concurrent booking requests. 
+The system shall target 99.5% system availability and support daily database backup restoration. 
+The system shall prevent double-booking during simultaneous attempts for the same seat. 
+
+Administration & User Support 
+The system shall allow an administrator to manage user accounts and oversee relevant system records. 
+The system shall allow an administrator to manage posted content and review system logs. 
+The system shall prevent Buyer and Organizer users from accessing administrator-only functions. 
+The system shall provide an FAQ page for common user questions. 
+The system shall provide an interactive online booking guide. 
