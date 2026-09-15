@@ -1,0 +1,216 @@
+Test Plan Document
+Smart Event & Concert Ticket Booking Management System
+
+1. Test Plan Identifier:
+Test Plan ID: TP-SECTBMS-001
+Project Name: Smart Event & Concert Ticket Booking Management System
+Version: 1.0
+Prepared By: QA Testing Team
+Date: 10th September, 2026
+
+2. Introduction:
+● This test plan defines the testing strategy, scope, objectives, resources, schedule, and
+responsibilities required for testing the Smart Event & Concert Ticket Booking Management
+System.
+● The system enables users to register and log in, discover events, filter by category or genre, selectseats using an interactive seat map, apply promo codes, make payments through a third-party
+payment gateway, and receive digital tickets with QR codes.
+● The system also provides an organizer portal for event management and analytics.
+● Testing will verify that the system functions correctly, securely, reliably, and efficiently according
+to the Software Requirements Specification (SRS).
+● The main objective is to ensure correct event discovery, seat availability and locking, booking and payment processing, ticket/QR issuance, organizer functions, data integrity, performance, and
+reliability.
+
+3. Test Scope:
+In-scope:
+● User registration, login, authentication, and profile management
+● Event search, discovery, category/genre filtering, and event details
+● Interactive seat map, seat selection, temporary seat locking, and booking
+● Checkout, order summary, promo code validation, and total calculation
+● Payment processing through the integrated payment gateway interface
+● Booking confirmation and digital ticket issuance
+● QR-code generation and downloadable PDF ticket
+● Confirmation email generation through the email service
+● Organizer portal, event management, and analytics
+● Database storage/retrieval of users, events, seats, bookings, and ticket information
+● Performance, security, concurrency, availability, backup/recovery, and usability requirements
+Out of scope:
+● Physical printing and mailing of tickets
+● Manufacturing/testing of physical gate or scanning hardware
+● Direct bank ledger auditing
+● Internal implementation testing of third-party payment gateway and email-provider infrastructure
+
+4. Test Items:
+1. User Authentication & Profile Management – Registration, login, validation, secure password
+storage, token handling, and role-based access.
+2. Event Search & Discovery – Event search, category/genre filtering, and event information
+display.
+3. Interactive Seat Selection & Booking – Seat-map states, selection, 10-minute temporary locks,
+booking calculation, and double-booking prevention.
+4. Promo Code & Checkout – Promo-code handling, order summary, and final amount calculation.
+5. Payment Processing – Payment request, success/failure/timeout handling, booking reference, and
+confirmation.
+6. Digital Ticket & QR Code Issuance – PDF ticket, unique QR code, download, and confirmation
+email.
+7. Organizer Management Portal – Event management and organizer dashboard/analytics.
+8. Booking & Database Management – Correct storage, retrieval, and consistency of booking
+records.
+9. Security, Performance & Reliability – HTTPS, access control, response time, concurrent
+requests, availability, backup/recovery, and error handling.
+10. Administration & User Support – Administrative/user-management functions supported by the
+SRS and system workflows.
+
+5. Features to be Tested:
+1. User Authentication – registration, login, input validation, bcrypt password hashing, JWT/token
+handling, and role-based access.
+2. Event Discovery – search, trending/category presentation, and genre/category filtering.
+3. Seat Booking – real-time seat availability, green/red/yellow seat states, selection, temporary
+locking, total calculation, and double-booking prevention.
+4. Checkout – order summary, promo-code processing, payment validation, and final amount
+calculation.
+5. Payment – gateway integration, successful transactions, failures, timeouts, and retry handling.
+6. Ticket Issuance – unique booking reference, PDF ticket, QR code, download, and email
+confirmation.
+7. Organizer Portal – event management and analytics.
+8. Database – correct storage and retrieval of Users, Events, Seats, and Bookings.9. Non-functional requirements – seat-map update within 1.5 seconds, page load below 2 seconds,
+up to 2,000 concurrent booking requests, 99.5% availability, daily backup/recovery, and simple
+navigation.
+10. Security – HTTPS, bcrypt password hashing, RBAC, and PCI-DSS-compliant payment-gateway
+usage.
+
+6. Level of Testing and Testing Strategies:
+6.1 Unit Testing
+Individual components such as authentication, event filtering, seat-locking logic, promo-code validation,
+payment handling, ticket generation, and database operations will be tested independently. Strategy: use
+valid, invalid, boundary, and exception inputs.
+6.2 Integration Testing
+Interactions will be tested across: User Login → Event Search → Event Selection → Seat Selection →
+Seat Lock → Checkout → Payment → Booking Confirmation → QR Ticket/Email. Strategy: verify
+correct data and state transfer.
+6.3 System Testing
+The complete web application will be tested as an integrated system. Strategy: execute complete customer
+and organizer workflows.
+6.4 Acceptance Testing
+The system will be tested against the functional and non-functional requirements and acceptance criteria
+defined in the SRS.
+
+7. Testing Types:
+7.1 Functional Testing
+Verifying each system function produces the expected result for valid and invalid inputs.
+7.2 Performance Testing
+Verify page-load performance, seat-map response time, and concurrent booking-request handling.
+7.3 Security Testing
+Verify authentication, authorization, HTTPS, password protection, RBAC, and protection from
+unauthorized access.
+7.4 Usability Testing
+Check ease of navigation through event discovery, seat selection, checkout, payment, and ticket
+download.
+7.5 Compatibility Testing
+Verify operation across supported browsers and common desktop/mobile screen sizes.7.6 Regression Testing
+Ensure existing event, booking, payment, and ticket functions continue to work after changes.
+7.7 Validation Testing
+Verify the final system meets the SRS requirements and acceptance criteria.
+7.8 Reliability & Recovery Testing
+Verify handling of payment/network failures, seat-lock expiry, backups, and recovery.
+
+8. Testing Environment:
+Hardware Requirements
+• Processor: Intel i5 or equivalent
+• RAM: 8 GB minimum
+• Storage: 256 GB or higher
+Software Requirements
+• Operating System: Windows 10/11 or Linux
+• Browser: Chrome, Firefox, Edge
+• Database: MySQL/PostgreSQL or equivalent relational database
+• Web Server: Apache/Nginx or equivalent
+Testing Tools
+• Selenium – browser automation
+• JUnit / TestNG – unit testing
+• Postman – API testing
+• JMeter – performance/load testing
+• Browser developer tools – network and performance checks
+Network
+• Stable internet connection for payment-gateway and email-service integration testing.
+• Network interruption and recovery scenarios will also be tested.
+
+9. Test Schedule:
+Phase Activity Start Date End Date
+Phase 1 Test plan preparation 10 Sep 2026 10 Sep 2026
+Phase 2 Test case design 10 Sep 2026 11 Sep 2026
+Phase 3 Test environment setup 11 Sep 2026 11 Sep 2026
+Phase 4 Test execution 12 Sep 2026 14 Sep 2026
+Phase 5 Bug fixing and re-testing 15 Sep 2026 16 Sep 2026
+Phase 6 Final testing and reporting 17 Sep 2026 17 Sep 2026
+
+10. Roles and Responsibilities:
+Role Responsibility
+Test Manager Oversees the testing process and reviews final results.
+Test Lead Creates the strategy and plan, coordinates activities, and monitors
+progress.
+Test Engineer Designs, executes, and documents test cases.
+Developer Fixes reported defects and supports technical investigation.
+QA Analyst Validates fixes, performs regression testing, and prepares QA reports.
+Project Guide Reviews testing progress and approves final documentation.
+
+11. Entry Criteria:
+Testing will begin when:
+● A testable software build is available.
+● The test environment is ready and accessible.
+● Test cases and test data are prepared and approved.
+● The SRS and project documentation are available.
+● The major development phase for the tested build is completed.
+● Mock payment responses and representative event/seat data are available.
+12. Exit Criteria:
+Testing will be considered complete when:
+● All planned test cases have been executed.
+● All critical and high-priority defects are fixed and retested.
+● Registration, event discovery, seat selection/locking, payment, and ticket issuance work as
+specified.
+● The system prevents double-booking and maintains correct seat/booking status.
+● Payment success, failure, and timeout responses are handled accurately.
+● Data is stored and retrieved correctly without critical errors.
+● Defined performance, security, availability, and usability requirements are satisfied or formally
+accepted.
+● Final test results and defect status are documented and approved.
+
+13. Deliverables:
+Deliverable Description
+Test Plan Defines testing scope, strategy, schedule, environment, responsibilities, and
+criteria.
+Test Cases Contains scenarios, preconditions, steps, test data, expected/actual results,
+and status.
+Test Data Data required for users, events, seats, bookings, promo codes, and payment
+responses.
+Defect Reports Records identified defects, severity/priority, status, and retest information.
+Test Execution Report Summarizes executed, passed, failed, and blocked test cases.
+Final Test Report Provides overall testing results, defect summary, and system quality status.
+
+14. Risk and Mitigation:
+Risk Mitigation
+Payment gateway downtime/timeout Use mock success/failure/timeout responses; verify retry
+handling and release of temporary locks.
+Network failure during booking/payment Handle errors gracefully and prevent incomplete or
+duplicate transactions.
+Double-booking of seats Test simultaneous booking attempts and verify atomic
+seat locking/status updates.
+Seat-lock expiry issues Verify the 10-minute temporary lock and release
+behavior.
+Incorrect event or seat data Validate required fields and non-negative prices/counts;
+verify database consistency.
+QR/PDF ticket generation failure Test generation errors and ensure the system does not
+falsely confirm an incomplete booking.
+Unauthorized access Verify authentication, RBAC, HTTPS, secure password
+hashing, and protected functions.
+High concurrent booking load Use load testing to verify the target of up to 2,000
+concurrent booking requests.
+Database/server failure Maintain backups and test recovery/restoration
+procedures.
+Limited test data Prepare varied users, events, seats, promo codes,
+bookings, and payment outcomes.
+
+Conclusion:
+The Test Plan provides a structured approach for testing the Smart Event & Concert Ticket Booking
+Management System. It covers functional modules, testing levels and types, environment, schedule,
+responsibilities, entry and exit criteria, deliverables, risks, and acceptance-focused checks. Proper
+execution of the planned tests will help ensure that event discovery, seat booking, payment processing,
+digital ticket generation, organizer functions, security, performance, and reliability meet the requirements
+defined in the SRS.
