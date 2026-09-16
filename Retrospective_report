@@ -1,0 +1,60 @@
+Retrospective Report
+
+A retrospective report evaluates the testing process of the Smart Event and Concert Booking System to identify:
+
+- What went well
+- What didn't go well
+- Improvements for future projects
+
+Retrospective Report
+
+What Went Well
+
+- Effective Test Planning: Test cases were prepared for major modules, including user authentication, event search, seat booking, payment processing, and digital ticket generation.
+- Good Team Collaboration: Test cases were designed and executed by team members, supporting collaboration during the testing process.
+- Early Detection of Critical Bugs: Testing identified important scenarios such as invalid payment details, sold seat selection, incorrect promo codes, and unauthorized organizer dashboard access.
+- Successful Use of Automation Tools: Digital ticket and QR code generation were tested, helping verify the ticket issuance workflow.
+- Successful Functional Testing: Event search, category filtering, organizer event creation, and several booking functions worked as expected during testing.
+- Performance and Security Testing: The seat response time was approximately 1.2 seconds, the landing page loaded in approximately 1.6 seconds, and HTTPS protection was verified.
+
+What Didn’t Go Well
+
+- Inconsistent Test Case Statuses: Several test cases were marked FAIL even though their actual results matched the expected results. This created confusion in the final test report.
+- Payment Gateway Failure Handling: Payment failure and retry scenarios required further verification, especially for releasing locked seats and handling payment interruptions.
+- Limited Performance Testing Initially: The SRS specifies support for up to 2,000 concurrent booking requests, but the available test cases do not demonstrate a full load test at that level.
+- Incomplete Requirement Traceability: Test cases were not directly linked to unique requirement IDs from the SRS.
+- Limited Testing of Edge Cases: Additional testing is needed for seat lock expiry, payment timeouts, database restoration, and email delivery failures.
+- Incomplete Documentation of Test Evidence: The test report records actual results but does not include detailed logs, screenshots, or execution evidence for every test.
+
+Challenges Faced
+
+- Third-Party Payment Gateway Dependency: Payment processing depends on external APIs, which may experience failures, delays, or timeouts.
+- High Load During Popular Concerts: Popular events may generate a large number of simultaneous seat selection and booking requests.
+- Seat Availability Synchronization: Maintaining accurate seat status and preventing double-booking during concurrent requests is challenging.
+- Coordination Between Testing and Development: Inconsistent test status reporting can make it difficult to identify actual defects.
+- Digital Ticket and QR Code Validation: Ensuring that confirmed bookings generate valid PDF tickets and QR codes requires careful verification.
+
+Improvements Suggested
+
+- Better Requirement Analysis: Define unique requirement IDs, detailed acceptance criteria, and clear error-handling requirements before development.
+- Early Performance Testing: Perform load testing early, including concurrent seat booking and high-demand event scenarios.
+- Stronger Risk Assessment: Identify risks related to payment failure, seat double-booking, server downtime, database loss, and QR ticket generation.
+- Improved Test Case Review: Review expected results, actual results, and status labels before finalizing the test report.
+- Improved Communication: Maintain regular coordination between developers, testers, and project managers.
+- Better Test Automation: Automate regression testing for authentication, seat availability, payment workflows, and ticket generation.
+- Enhanced Monitoring: Monitor server performance, payment transactions, seat locks, and system errors during testing and operation.
+
+Lessons Learned
+
+- Importance of Early Testing: Testing major booking workflows early helps identify defects before the final project stage.
+- Need for Continuous Monitoring: Continuous monitoring of seat availability, payment processing, and server performance helps maintain system reliability.
+- Critical Role of Security Testing: HTTPS, password protection, role-based access control, and secure payment processing are essential for protecting customer information.
+- Importance of Accurate Test Reporting: Test results must clearly distinguish between actual defects and incorrectly marked test statuses.
+- Importance of Concurrency Testing: Simultaneous booking attempts must be tested to ensure that one seat cannot be sold to multiple customers.
+- Importance of Clear Requirements: Well-defined requirements make development, testing, and acceptance easier.
+
+Conclusion
+
+Proper risk management, continuous testing, and accurate reporting help ensure that the Smart Event and Concert Booking System is secure, reliable, and efficient.
+
+The retrospective highlights the importance of effective test planning, early performance testing, strong payment and seat-booking validation, and improved communication. Future projects can benefit from better requirement traceability, automated testing, and comprehensive monitoring to improve system quality and user satisfaction.
