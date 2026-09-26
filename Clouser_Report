@@ -1,0 +1,63 @@
+CLOSURE REPORT FOR SMART EVENT AND 
+CONCERT BOOKING SYSTEM
+1. Project Name:
+SMART EVENT AND CONCERT BOOKING SYSTEM
+2. Testing Scope:
+• Functional testing
+• Security testing
+• Performance testing
+• Seat selection and booking testing
+• Payment processing and ticket issuance testing
+• Digital ticket and QR code generation testing
+• Organizer management portal testing
+• Reliability and concurrency testing
+3. Test Summary:
+• Total Test Cases: 25
+• Passed: 19 (76%)
+• Failed: 6 (24%)
+• Defects Fixed: 4
+• Pending Defects: 2
+4. Defect Summary:
+Defect Status
+• Critical: Payment Processing and, Seat Booking / Concurrency
+• High: Digital Ticket & QR, Authentication and Security
+• Medium: Promo Code and Event Search
+• Low: Performance and Seat Selection Performance
+Issues Identified During Testing
+• Incorrect or inconsistent test case status labels.
+• Payment failure and retry scenarios require verification.
+• Additional performance testing is needed for high-volume booking.
+• Some edge cases, such as seat lock expiry and payment timeout, require further testing.
+5. Risk Status:
+• High Risks: Server failure, cybersecurity attacks, payment gateway failure, double-booking of seats, and 
+network outage require mitigation and monitoring.
+• Medium Risks: QR code/ticket generation failure, incorrect seat availability data, promo code errors, and 
+email notification failure require monitoring.
+• Low Risks: No specific low-risk items are formally classified in the available risk report.
+Risk Evaluation
+• HTTPS protection was verified.
+• Seat locking and concurrent booking protection were tested.
+• Payment success and failure scenarios were tested.
+• Database backup restoration and full high-volume load testing require additional verification.
+6. Quality Assessment:
+• Major functional modules have been tested.
+• Event search and category filtering worked as expected.
+• Organizer event creation and access control were verified.
+• Digital PDF ticket and QR code generation were tested.
+• Seat response time was approximately 1.2 seconds during the recorded test.
+• Landing page load time was approximately 1.6 seconds during the recorded test.
+• HTTPS protection was enforced during testing.
+Overall System Readiness: The system has undergone functional, security, performance, and concurrency testing. 
+7. Deliverables:
+• Software Requirement Specification (SRS)
+• Test Case Document
+• Test Execution Results
+• Risk Identification and Risk Mitigation Report
+• Retrospective Report
+• Defect Log
+• Performance Testing Report
+• Security Testing Report
+• Digital Ticket and QR Code Testing Report
+8. Sign-off:
+• Testing Status: Completed. 
+• Closure Status: Testing Closed; final approval can be given by the project guide/manager.
