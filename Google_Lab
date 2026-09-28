@@ -2,11 +2,8 @@ Overview
 In a challenge lab you’re given a scenario and a set of tasks. Instead of following step-by-step instructions, you will use the skills learned from the labs in the course to figure out how to complete the tasks on your own! An automated scoring system (shown on this page) will provide feedback on whether you have completed your tasks correctly.
 
 When you take a challenge lab, you will not be taught new Google Cloud concepts. You are expected to extend your learned skills, like changing default values and reading and researching error messages to fix your own mistakes.
-
 To score 100% you must successfully complete all tasks within the time period!
-
 This lab is recommended for students who have enrolled in the Secure Software Delivery course. Are you ready for the challenge?
-
 Challenge Scenario
 You are a software engineer at Cymbal Bank, tasked with securely deploying a new web application to the cloud. The application handles sensitive customer data, so security is paramount. Your goal is to implement a robust, automated pipeline that builds, scans, signs, and deploys the containerized application while adhering to strict security standards. For this challenge, you will use Google Cloud services such as Artifact Registry, Binary Authorization, and Cloud Build to achieve this objective on a sample application.
 
@@ -30,6 +27,8 @@ Access to a standard internet browser (Chrome browser recommended).
 Note: Use an Incognito (recommended) or private browser window to run this lab. This prevents conflicts between your personal account and the student account, which may cause extra charges incurred to your personal account.
 Time to complete the lab—remember, once you start, you cannot pause a lab.
 Note: Use only the student account for this lab. If you use a different Google Cloud account, you may incur charges to that account.
+
+
 Task 1. Enable APIs and set up the environment
 Before you can start building your secure CI/CD pipeline, you need to enable the necessary Google Cloud APIs and set up your development environment. This will ensure that you have access to all the required services and tools.
 
@@ -55,6 +54,9 @@ The scanning repository will be used to store the Docker image before it is scan
 To verify the objective, click Check my progress.
 
 Enable APIs and set up Artifact Registries.
+
+
+
 Task 2. Create the Cloud Build pipeline
 In this task, you'll lay the foundation for your CI/CD pipeline by creating a basic Cloud Build configuration to build and push your Docker image to Artifact Registry. This initial step will enable you to scan the image for vulnerabilities later in the lab.
 
@@ -63,30 +65,22 @@ Start by adding the following roles to the Cloud Build service account:
 roles/iam.serviceAccountUser
 roles/ondemandscanning.admin
 In the Cloud Shell Editor, open the sample-app/cloudbuild.yaml file.
-
 Complete TODOs: Fill out the image name placeholders (<image-name>). For this, you will need to reference the artifact-scanning-repo repository, and the image name should be sample-image. Make sure to use the region REGION.
-
 Submit the build.
-
 Check out the image you pushed to the artifact-scanning-repo repository and verify you can see a number of Critical vulnerabilities in the scan results.
-
 To verify the objective, click Check my progress.
-
 Create a Cloud Build pipeline.
+
+
 Task 3. Set up Binary Authorization
 To enforce strict security policies for container deployments, you'll leverage Binary Authorization. This service allows you to define who can deploy what images, and under which conditions. In this task, you'll create and configure the necessary components of Binary Authorization, including attestors, notes, and KMS keys. This will prepare you to integrate Binary Authorization into your CI/CD pipeline.
 
 Create an Attestor
 In Cloud Shell, create a JSON file. This file will define an Attestor note containing the attestation hint. The attestation hint's human_readable_name should be set to "Container Vulnerabilities attestation authority".
-
 Use the Container Analysis API to create a new note with the ID vulnerability_note. The note's details should be defined in the note file you created in the previous step. Make sure to include proper authentication and set the appropriate Content-Type header in your API request.
-
 Use the Container Analysis API to retrieve the details of the Attestor note you just created. Make sure to include proper authentication in your API request.
-
 Use the gcloud command-line tool to create a new Binary Authorization Attestor. The Attestor ID should be vulnerability-attestor, and it should be associated with the Attestor note you created earlier.
-
 Use the gcloud command-line tool to list all existing Binary Authorization Attestors. Verify that the Attestor you just created is included in the list.
-
 Construct an IAM policy that grants the Binary Authorization service account the roles/containeranalysis.notes.occurrences.viewer role on the Attestor note you created. Then, use the Container Analysis API to set this IAM policy on the note.
 
 Generate a KMS Pair
@@ -107,6 +101,10 @@ Incorporate Your Attestor: Include the vulnerability-attestor you previously cre
 To verify the objective, click Check my progress.
 
 Create an Attestor, KMS pair, and update the policy.
+
+
+
+
 Task 4. Create a Cloud Build CI/CD pipeline with vulnerability scanning
 Building upon the basic pipeline from Task 2, you'll now enhance it with crucial security features. This includes vulnerability scanning to identify potential weaknesses in your container images and image signing to ensure their integrity. In this task, you will integrate vulnerability scanning and image signing into your CI/CD pipeline, making it more robust and secure.
 
@@ -229,6 +227,10 @@ Note: your build is supposed fail due to a CRITICAL severity vulnerability. You 
 To verify the objective, click Check my progress.
 
 Integrate vulnerability scanning into your CI/CD pipeline.
+
+
+
+
 Task 5. Fix the vulnerability and redeploy the CI/CD pipeline
 In a real-world scenario, vulnerability scans often reveal issues that need to be addressed. This task simulates such a scenario, where your build fails due to a critical vulnerability. In this task, you will analyze the build failure, identify the vulnerability, and fix it by updating your application's dependencies. You will then re-trigger the Cloud Build pipeline to ensure the build completes successfully without any critical vulnerabilities.
 
