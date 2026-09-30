@@ -21,13 +21,6 @@ Read these instructions. Labs are timed and you cannot pause them. The timer, wh
 
 This hands-on lab lets you do the lab activities in a real cloud environment, not in a simulation or demo environment. It does so by giving you new, temporary credentials you use to sign in and access Google Cloud for the duration of the lab.
 
-To complete this lab, you need:
-
-Access to a standard internet browser (Chrome browser recommended).
-Note: Use an Incognito (recommended) or private browser window to run this lab. This prevents conflicts between your personal account and the student account, which may cause extra charges incurred to your personal account.
-Time to complete the lab—remember, once you start, you cannot pause a lab.
-Note: Use only the student account for this lab. If you use a different Google Cloud account, you may incur charges to that account.
-
 
 Task 1. Enable APIs and set up the environment
 Before you can start building your secure CI/CD pipeline, you need to enable the necessary Google Cloud APIs and set up your development environment. This will ensure that you have access to all the required services and tools.
