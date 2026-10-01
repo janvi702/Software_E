@@ -1,0 +1,11 @@
+PART 1 — Creating Repository 
+Step 1: Create GitHub Account 
+• Go to https://github.com 
+• Click Sign Up 
+• Complete registration and login  
+Step 2: Create Repository 
+1. Click New Repository 
+2. Repository Name: SE-Lab 
+3. Select Public 
+4. Tick Add README file 
+5. Click Create Repository 
