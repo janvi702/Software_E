@@ -1,0 +1,55 @@
+Step 1: pip install selenium in the VS code terminal
+
+step 2: write code:
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+# Initialize Chrome driver
+driver = webdriver.Chrome()
+wait = WebDriverWait(driver, 10)
+
+try:
+    # Test 1: Valid login
+    driver.get("https://the-internet.herokuapp.com/login")
+    
+    # Wait for the username field to be visible before interacting
+    username_field = wait.until(EC.visibility_of_element_located((By.ID, "username")))
+    password_field = driver.find_element(By.ID, "password")
+    submit_btn = driver.find_element(By.CSS_SELECTOR, "button[type='submit']")
+
+    username_field.send_keys("tomsmith")
+    password_field.send_keys("SuperSecretPassword!")
+    submit_btn.click()
+
+    message = wait.until(EC.visibility_of_element_located((By.ID, "flash")))
+    
+    if "You logged into a secure area!" in message.text:
+        print("Test 1: PASS - Valid login")
+    else:
+        print("Test 1: FAIL - Valid login")
+
+    # Test 2: Invalid password
+    driver.get("https://the-internet.herokuapp.com/login")
+    
+    username_field = wait.until(EC.visibility_of_element_located((By.ID, "username")))
+    password_field = driver.find_element(By.ID, "password")
+    submit_btn = driver.find_element(By.CSS_SELECTOR, "button[type='submit']")
+
+    username_field.send_keys("tomsmith")
+    password_field.send_keys("wrong123")
+    submit_btn.click()
+
+    message = wait.until(EC.visibility_of_element_located((By.ID, "flash")))
+    
+    if "Your password is invalid!" in message.text:
+        print("Test 2: PASS - Invalid password")
+    else:
+        print("Test 2: FAIL - Invalid password")
+
+finally:
+    # Ensure the browser always closes, even if tests fail
+    driver.quit()
+
+step 3: open terminal and run.
